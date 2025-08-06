@@ -2,19 +2,17 @@ package com.zoo.animals;
 
 public abstract class Animal {
 
-    // 🔒 protected — доступ для нащадків
     protected String name;
     protected int age;
     protected double weight;
 
-    // 🔐 private — тільки всередині класу
     private int energyLevel;
 
     public Animal(String name, int age, double weight) {
         this.name = name;
         this.age = age;
         this.weight = weight;
-        this.energyLevel = 50; // базове значення
+        this.energyLevel = 50;
     }
 
     public void eat() {
@@ -38,7 +36,6 @@ public abstract class Animal {
                 " кг, Енергія: " + energyLevel);
     }
 
-    // ✅ Геттери
     public String getName() {
         return name;
     }
@@ -55,7 +52,6 @@ public abstract class Animal {
         return energyLevel;
     }
 
-    // 👇 Для дочірніх класів, які зменшують енергію
     protected void decreaseEnergy(int amount) {
         energyLevel = Math.max(0, energyLevel - amount);
         System.out.println(name + " втрачає " + amount + " енергії. 🔋 Поточна: " + energyLevel);
