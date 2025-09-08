@@ -1,34 +1,34 @@
 package com.zoo.zookeeper;
 
 import com.zoo.animals.Animal;
+import com.zoo.animals.Eatable_I;
+import com.zoo.animals.Playable_I;
 
 public class ZooKeeper {
+
     private String name;
 
     public ZooKeeper(String name) {
         this.name = name;
     }
 
-    public void feedAnimal(Animal animal) {
-        System.out.println(name + " feeds " + animal.getName());
+    public void feedAnimal(Eatable_I animal) {
         animal.eat();
+        System.out.println(name + " fed the animal.");
     }
 
-    public void playWithAnimal(Animal animal) {
-        System.out.println(name + " plays with " + animal.getName());
-        animal.makeSound();
+    public void playWithAnimal(Playable_I animal) {
+        animal.play();
+        System.out.println(name + " played with the animal.");
     }
 
     public void checkAnimalEnergyLevel(Animal animal) {
         int energy = animal.getEnergyLevel();
-        String level;
-        if (energy <= 30) {
-            level = "Низький";
-        } else if (energy <= 70) {
-            level = "Середній";
-        } else {
-            level = "Високий";
-        }
-        System.out.println(animal.getName() + " має рівень енергії: " + level + " (" + energy + ")");
+        String status = (energy <= 30) ? "Low"
+                : (energy <= 70) ? "Medium"
+                : "High";
+
+        System.out.println(animal.getName() + " energy level: " + status + " (" + energy + ")");
     }
 }
+

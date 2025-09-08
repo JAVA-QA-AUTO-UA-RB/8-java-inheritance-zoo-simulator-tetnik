@@ -1,21 +1,42 @@
 package com.zoo.species;
 
 import com.zoo.animals.Bird;
+import com.zoo.animals.Playable_I;
 
-public class Eagle extends Bird {
+public class Eagle extends Bird implements Playable_I {
 
-    public Eagle(String name, int age, double weight, double wingSpan) {
-        super(name, age, weight, wingSpan);
+    public Eagle(String name, int energyLevel, double wingSpan) {
+        super(name, energyLevel, wingSpan);
     }
 
     @Override
     public void makeSound() {
-        System.out.println(name + " кричить: Кріі-кріі! 🦅");
+        System.out.println("Кріі-кріі! 🦅");
     }
 
     @Override
-    public void fly() {
-        decreaseEnergy(20);
-        System.out.println(name + " летить високо в небі.");
+    public void eat() {
+        changeEnergy(20);
+    }
+
+    @Override
+    public void sleep() {
+        changeEnergy(30);
+    }
+
+    @Override
+    public void uniqueBirdAction() {
+        buildNest();
+    }
+
+    private void buildNest() {
+        System.out.println(getName() + " is building a nest.");
+    }
+
+    @Override
+    public void play() {
+        makeSound();
+        changeEnergy(-20);
     }
 }
+

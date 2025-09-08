@@ -4,22 +4,12 @@ public abstract class Mammal extends Animal {
 
     protected String furColor;
 
-    public Mammal(String name, int age, double weight, String furColor) {
-        super(name, age, weight);
+    public Mammal(String name, int energyLevel, String furColor) {
+        super(name, energyLevel);
         this.furColor = furColor;
     }
 
-    @Override
-    public void makeSound() {
-        System.out.println(name + " видає звук ссавця.");
-    }
-
-    public void groom() {
-        System.out.println(name + " доглядає за своїм хутром (" + furColor + "). 🧼");
-    }
-
-    public String getFurColor() {
-        return furColor;
-    }
+    public abstract void move();
 }
+
 
