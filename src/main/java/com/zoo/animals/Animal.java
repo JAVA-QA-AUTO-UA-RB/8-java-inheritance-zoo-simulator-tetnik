@@ -1,60 +1,50 @@
 package com.zoo.animals;
 
-public abstract class Animal {
+import com.zoo.animals.Eatable_I;
+import com.zoo.animals.Sleepable_I;
+
+public abstract class Animal implements Eatable_I,Sleepable_I {
 
     protected String name;
-    protected int age;
-    protected double weight;
 
     private int energyLevel;
 
-    public Animal(String name, int age, double weight) {
+    public Animal(String name) {
+        this(name, 50);
+    }
+
+    public Animal(String name, int energyLevel) {
         this.name = name;
-        this.age = age;
-        this.weight = weight;
-        this.energyLevel = 50;
-    }
-
-    public void eat() {
-        energyLevel = Math.min(100, energyLevel + 20);
-        System.out.println(name + " їсть. 🔋 Енергія: " + energyLevel);
-    }
-
-    public void sleep() {
-        energyLevel = Math.min(100, energyLevel + 30);
-        System.out.println(name + " спить. 💤 Енергія: " + energyLevel);
-    }
-
-    public void makeSound() {
-        System.out.println(name + " видає загальний звук.");
-    }
-
-    public void displayInfo() {
-        System.out.println("🐾 Ім’я: " + name +
-                ", Вік: " + age +
-                ", Вага: " + weight +
-                " кг, Енергія: " + energyLevel);
+        this.energyLevel = energyLevel;
     }
 
     public String getName() {
         return name;
     }
 
-    public int getAge() {
-        return age;
-    }
-
-    public double getWeight() {
-        return weight;
-    }
-
     public int getEnergyLevel() {
         return energyLevel;
     }
 
-    protected void decreaseEnergy(int amount) {
-        energyLevel = Math.max(0, energyLevel - amount);
-        System.out.println(name + " втрачає " + amount + " енергії. 🔋 Поточна: " + energyLevel);
+    protected void changeEnergy(int delta) {
+        this.energyLevel += delta;
+        if (this.energyLevel > 50) {
+            this.energyLevel = 50;
+        } else if (this.energyLevel < 0) {
+            this.energyLevel = 0;
+        }
+    }
+
+    public abstract void makeSound();
+
+    @Override
+    public abstract void eat();
+
+    @Override
+    public abstract void sleep();
+
+    public void displayInfo() {
+        System.out.println("Name: " + name + ", Energy: " + energyLevel);
     }
 }
 

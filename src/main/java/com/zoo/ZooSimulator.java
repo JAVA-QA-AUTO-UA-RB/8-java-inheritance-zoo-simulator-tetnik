@@ -3,85 +3,72 @@ package com.zoo;
 import com.zoo.species.*;
 import com.zoo.zookeeper.ZooKeeper;
 import com.zoo.animals.Animal;
+import com.zoo.animals.Playable_I;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ZooSimulator {
 
     public static void main(String[] args) {
 
-        printSection("Старт симуляції зоопарку");
+        System.out.println("Старт симуляції зоопарку");
 
-        print("Створення тварин...");
+        System.out.println("Створення тварин...");
 
-        Lion King = new Lion("Сімба", 5, 180.0, "рудий");
-        Elephant Elephant = new Elephant("Хатхі", 13, 600.0, "сірий");
-        Eagle Eagle = new Eagle("Ітан", 3, 6.0, 2.1);
-        Penguin Penguin = new Penguin("Ковальський", 4, 15.0, 0.6);
+        Lion King = new Lion("Сімба", 5,  "рудий");
+        Elephant Elephant = new Elephant("Хатхі", 13,  "сірий");
+        Eagle Eagle = new Eagle("Ітан", 3, 6.0);
+        Penguin Penguin = new Penguin("Ковальський", 4,  0.6);
 
-        Animal[] animals = {King, Elephant, Eagle, Penguin};
+        List<Animal> animals = new ArrayList<>();
+        animals.add(King);
+        animals.add(Elephant);
+        animals.add(Eagle);
+        animals.add(Penguin);
 
-        print("Створення доглядача...");
+        System.out.println("Створення доглядача...");
         ZooKeeper keeper = new ZooKeeper("Тетяна");
 
-        printSection("Ранок:Початковий стан тварин");
+
+        System.out.println("Ранок:Початковий стан тварин");
 
         for (Animal animal : animals) {
             animal.displayInfo();
         }
 
-        printSection("Годування тварин");
+
+        System.out.println("Годування тварин");
 
         for (Animal animal : animals) {
             keeper.feedAnimal(animal);
-        }
-
-        printSection("Ігри та активності з тваринами");
-
-        keeper.playWithAnimal(King);
-        King.hunt();
-        King.groom();
-
-        keeper.playWithAnimal(Elephant);
-        Elephant.spraySelf();
-        Elephant.groom();
-
-        keeper.playWithAnimal(Eagle);
-        Eagle.fly();
-
-        keeper.playWithAnimal(Penguin);
-        Penguin.fly();
-
-        printSection("Перевірка енергії тварин після активностей");
-
-        for (Animal animal : animals) {
             keeper.checkAnimalEnergyLevel(animal);
         }
 
+        System.out.println("Ігри та активності з тваринами");
 
-        printSection("Вечір: Тварини відпочивають");
+        List<Playable_I> playables = new ArrayList<>();
+        playables.add(King);
+        playables.add(Elephant);
+        playables.add(Eagle);
+        playables.add(Penguin);
 
-        for (Animal animal : animals) {
-            animal.sleep();
+        for (Playable_I p : playables) {
+            keeper.playWithAnimal(p);
         }
 
-        printSection("Стан тварин наприкінці дня");
+        System.out.println("Стан тварин наприкінці дня");
 
         for (Animal animal : animals) {
-            animal.displayInfo();
+            keeper.checkAnimalEnergyLevel(animal);
+            animal.makeSound();
         }
 
-        printSection("Симуляція завершена");
+        System.out.println("Симуляція завершена");
+       }
+
     }
 
-    private static void print(String message) {
-        System.out.println("[ZooSimulator] " + message);
-    }
-
-    private static void printSection(String title) {
-        System.out.println("\n==============================");
-        System.out.println(title);
-        System.out.println("==============================\n");
-    }
-}
 
 
 
