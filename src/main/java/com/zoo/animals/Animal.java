@@ -9,6 +9,10 @@ public abstract class Animal implements Eatable_I,Sleepable_I {
 
     private int energyLevel;
 
+    public Animal(String name) {
+        this(name, 50);
+    }
+
     public Animal(String name, int energyLevel) {
         this.name = name;
         this.energyLevel = energyLevel;

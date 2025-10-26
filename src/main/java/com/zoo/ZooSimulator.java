@@ -61,6 +61,7 @@ public class ZooSimulator {
 
         for (Animal animal : animals) {
             keeper.checkAnimalEnergyLevel(animal);
+            animal.makeSound();
         }
 
         System.out.println("Симуляція завершена");

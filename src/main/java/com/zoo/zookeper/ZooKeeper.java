@@ -14,12 +14,12 @@ public class ZooKeeper {
 
     public void feedAnimal(Eatable_I animal) {
         animal.eat();
-        System.out.println(name + " fed the animal.");
+        System.out.println(name + " fed " + ((Animal) animal).getName() + ".");
     }
 
     public void playWithAnimal(Playable_I animal) {
         animal.play();
-        System.out.println(name + " played with the animal.");
+        System.out.println(name + " played with " + ((Animal) animal).getName() + ".");
     }
 
     public void checkAnimalEnergyLevel(Animal animal) {

@@ -26,7 +26,7 @@ public class Lion extends Mammal implements Playable_I {
 
     @Override
     public void move() {
-        System.out.println("Lion runs.");
+        System.out.println("Lion runs swiftly.");
     }
 
     @Override
